@@ -98,12 +98,12 @@ fun Page1Screen(db: FlashCardDatabase) {
             modifier = Modifier
                 .background(Color.White)
                 .padding(6.dp),
-            colors = TextFieldDefaults.colors( // Use TextFieldDefaults.colors
+            colors = TextFieldDefaults.colors(
                 unfocusedTextColor = Color.Gray,
                 focusedTextColor = Color.Black,
                 unfocusedPlaceholderColor = Color.Gray,
 
-                unfocusedContainerColor = Color.White, // Use containerColor instead of backgroundColor
+                unfocusedContainerColor = Color.White,
                 focusedContainerColor = Color.White,
                 focusedIndicatorColor = Color.Gray,
                 unfocusedIndicatorColor = Color.Gray,
@@ -118,12 +118,12 @@ fun Page1Screen(db: FlashCardDatabase) {
             modifier = Modifier
                 .background(Color.White)
                 .padding(6.dp),
-            colors = TextFieldDefaults.colors( // Use TextFieldDefaults.colors
+            colors = TextFieldDefaults.colors(
                 unfocusedTextColor = Color.Gray,
                 unfocusedPlaceholderColor = Color.Gray,
 
                 focusedTextColor = Color.Black,
-                unfocusedContainerColor = Color.White, // Use containerColor instead of backgroundColor
+                unfocusedContainerColor = Color.White,
                 focusedContainerColor = Color.White,
                 focusedIndicatorColor = Color.Gray,
                 unfocusedIndicatorColor = Color.Gray,
@@ -138,10 +138,10 @@ fun Page1Screen(db: FlashCardDatabase) {
             modifier = Modifier
                 .background(Color.White)
                 .padding(6.dp),
-            colors = TextFieldDefaults.colors( // Use TextFieldDefaults.colors
+            colors = TextFieldDefaults.colors(
                 unfocusedTextColor = Color.Gray,
                 focusedTextColor = Color.Black,
-                unfocusedContainerColor = Color.White, // Use containerColor instead of backgroundColor
+                unfocusedContainerColor = Color.White,
                 focusedContainerColor = Color.White,
                 focusedIndicatorColor = Color.Gray,
                 unfocusedIndicatorColor = Color.Gray,
@@ -152,7 +152,6 @@ fun Page1Screen(db: FlashCardDatabase) {
         Button(onClick ={
             if(Question == ""||Answer == ""||Category=="")
             {
-                // In an Activity or Context-aware function:
                 Toast.makeText(context, "All inputs required !!", Toast.LENGTH_SHORT).show()
             }
             else{addFlashCard(scope, Question, Answer, Category, db)

@@ -2,10 +2,12 @@ package com.example.team23_quizsystemtask
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.launch
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -42,30 +44,32 @@ import androidx.compose.ui.text.style.TextAlign
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val db = FlashCardDatabase.getInstance(this);
+
         setContent {
             Team23QuizSystemTaskTheme{
-                Page1Screen()
+                Page1Screen(db)
             }
         }
+
     }
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun Page1Preview() {
-    Page1Screen()
-}
+
 
 @Composable
-fun Page1Screen() {
+fun Page1Screen(db: FlashCardDatabase) {
     var Question by remember { mutableStateOf("") }
     var Answer by remember { mutableStateOf("") }
     var Category by remember { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
     Column (modifier = Modifier.background(Color.White).fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         )
@@ -136,7 +140,7 @@ fun Page1Screen() {
                 // In an Activity or Context-aware function:
                 Toast.makeText(context, "All inputs required !!", Toast.LENGTH_SHORT).show()
             }
-            else{ addFlashCard(Question,Answer,Category)
+            else{addFlashCard(scope, Question, Answer, Category, db)
                 Question="";
                 Category="";
                 Answer=""
@@ -167,9 +171,12 @@ fun Page1Screen() {
 
 
 }
-fun addFlashCard(qusestion: String,answer: String,category: String)
+fun addFlashCard(scope: CoroutineScope, question: String, answer: String, category: String, db: FlashCardDatabase)
 {
-
+    scope.launch{
+        db.flashcardDao().AddQuestion(FlashCard(question = question, answer = answer, category = category))
+        Log.d("category",db.flashcardDao().GetCategories().toString())
+    }
 }
 fun goToQuiz()
 {

@@ -12,11 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.team23_quizsystemtask.ui.theme.Team23QuizSystemTaskTheme
+import 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val spinner = findViewById<Spinner>(R.id.idofspinner )
+            val categories = listOf("Geography", "Literature")
+            val adapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                categories
+            )
+            spinner.adapter = adapter
             Team23QuizSystemTaskTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
@@ -26,14 +35,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        val spinner = findViewById<Spinner>(R.id.idofspinner )
-        val categories = listOf("Geography", "Literature")
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            categories
-        )
-        spinner.adapter = adapter
+
     }
 }
 

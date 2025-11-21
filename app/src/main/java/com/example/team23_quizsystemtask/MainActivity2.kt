@@ -47,7 +47,6 @@ class MainActivity2 : ComponentActivity() {
 fun MainScreen(db: FlashCardDatabase, modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
 
-
     var selectedCategory by remember { mutableStateOf<String?>(null) }
 
     var questionText by remember { mutableStateOf("") }
@@ -55,10 +54,11 @@ fun MainScreen(db: FlashCardDatabase, modifier: Modifier = Modifier) {
     var currentFlashCard by remember { mutableStateOf<FlashCard?>(null) }
 
     Column(
+
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         DisplayJCSpinner(
